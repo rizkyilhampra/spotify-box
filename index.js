@@ -64,11 +64,20 @@ async function updateTopTracks(json) {
 
   try {
     const filename = Object.keys(gist.data.files)[0]
+    const now = new Date()
+    const formattedDate = now.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    })
     await octo.gists.update({
       gist_id,
       files: {
         [filename]: {
-          filename: '🎵 My Spotify Top Tracks',
+          filename: `🎵 My Spotify Top Tracks (${formattedDate})`,
           content: lines.join('\n'),
         },
       },
